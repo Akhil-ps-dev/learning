@@ -49,12 +49,33 @@ class MyHomePage extends StatelessWidget {
 
             ElevatedButton(
                 onPressed: () {
-                  _incriment();
+                  btmSheet(context);
                 },
                 child: Text('Button'))
           ],
         ),
       ),
     );
+  }
+
+  Future<void> btmSheet(BuildContext ctx) async {
+    showModalBottomSheet(
+        context: ctx,
+        builder: (ctx1) {
+          return Container(
+            width: double.infinity,
+            height: 200,
+            color: Colors.red,
+            child: ListView(children: [
+              Text('Hello'),
+              Center(
+                child: ElevatedButton(
+                  child: Text('CLOSE'),
+                  onPressed: () => Navigator.of(ctx1).pop(),
+                ),
+              )
+            ]),
+          );
+        });
   }
 }
