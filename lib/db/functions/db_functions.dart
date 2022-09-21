@@ -8,5 +8,5 @@ ValueNotifier<List<Students>> studentsListNotifier = ValueNotifier([]);
 
 void addStudents(Students value) {
   studentsListNotifier.value.add(value);
-  print(value);
+  studentsListNotifier.notifyListeners();
 }
