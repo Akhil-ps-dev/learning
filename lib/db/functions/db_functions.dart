@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../model/data_model.dart';
 
@@ -6,7 +7,10 @@ import '../../model/data_model.dart';
 
 ValueNotifier<List<Students>> studentsListNotifier = ValueNotifier([]);
 
-void addStudents(Students value) {
-  studentsListNotifier.value.add(value);
+void addStudents(Students value) async {
+  // studentsListNotifier.value.add(value);
+
+  final studentDB = await Hive.openBox<Students>('studentdb');
+  studentDB.add(value);
   studentsListNotifier.notifyListeners();
 }
