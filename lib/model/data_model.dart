@@ -4,6 +4,7 @@ part 'data_model.g.dart';
 
 @HiveType(typeId: 1)
 class Students {
+  int? id;
   @HiveField(0)
   final String name;
   @HiveField(1)

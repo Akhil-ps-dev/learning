@@ -8,15 +8,22 @@ import '../../model/data_model.dart';
 ValueNotifier<List<Students>> studentsListNotifier = ValueNotifier([]);
 
 void addStudents(Students value) async {
-  // studentsListNotifier.value.add(value);
-
   final studentDB = await Hive.openBox<Students>('studentdb');
+  final _id = await studentDB.add(value);
+  value.id = _id;
 
-  studentDB.add(value);
-  studentsListNotifier.notifyListeners();
+  geAllStudents();
 }
 
 Future<void> geAllStudents() async {
   final studentDB = await Hive.openBox<Students>('studentdb');
+  studentsListNotifier.value.clear();
   studentsListNotifier.value.addAll(studentDB.values);
+  studentsListNotifier.notifyListeners();
+}
+
+Future<void> deleteStudents(int id) async {
+  final studentDB = await Hive.openBox<Students>('studentdb');
+  await studentDB.delete(id);
+  geAllStudents();
 }
