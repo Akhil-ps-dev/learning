@@ -11,6 +11,12 @@ void addStudents(Students value) async {
   // studentsListNotifier.value.add(value);
 
   final studentDB = await Hive.openBox<Students>('studentdb');
+
   studentDB.add(value);
   studentsListNotifier.notifyListeners();
+}
+
+Future<void> geAllStudents() async {
+  final studentDB = await Hive.openBox<Students>('studentdb');
+  studentsListNotifier.value.addAll(studentDB.values);
 }
