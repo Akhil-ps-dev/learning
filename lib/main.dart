@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'Home.dart';
+import 'model/data_model.dart';
 
-void main() {
+Future<void> main() async {
+  await Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(StudentsAdapter().typeId)) {
+    Hive.registerAdapter(StudentsAdapter());
+  }
   runApp(const MyApp());
 }
 
