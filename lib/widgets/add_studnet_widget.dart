@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sample_5/model/data_model.dart';
+
+import '../db/functions/db_functions.dart';
 
 class AddStudentForm extends StatelessWidget {
   final _nameControl = TextEditingController();
@@ -36,10 +39,12 @@ class AddStudentForm extends StatelessWidget {
   }
 
   Future<void> buttonClicked() async {
-    final name = _nameControl.text;
-    final age = _ageControl.text;
-    if (name.isEmpty || age.isEmpty) {
+    final _name = _nameControl.text;
+    final _age = _ageControl.text;
+    if (_name.isEmpty || _age.isEmpty) {
       return;
     }
+
+    addStudents(Students(_name, _age));
   }
 }
