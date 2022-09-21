@@ -5,6 +5,7 @@ import 'Home.dart';
 import 'model/data_model.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(StudentsAdapter().typeId)) {
     Hive.registerAdapter(StudentsAdapter());
